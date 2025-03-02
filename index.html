@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Bank App</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <h1><strong><u>Bank App</u></strong></h1>
+        <div id="container">
+            <p>Account Balance: <span id="balance">1000</span></p> <!-- Initial Balance -->
+        </div>
+        <p>Enter Transaction Amount: </p> 
+        <input type="number" id="amount" />
+        <br><br>
+        <button id="Debit" onclick="debitFunction()">Debit</button>
+        <button id="Credit" onclick="creditFunction()">Credit</button>
+        <p id="result"></p>
+
+        <script>
+            // Initial account balance
+            var account_balance = parseInt(document.getElementById("balance").innerText);
+
+            // Functions for Debit and Credit
+            function debitFunction() {
+                var entered_amount = parseInt(document.getElementById("amount").value);
+                if (isNaN(entered_amount) || entered_amount <= 0) {
+                    alert("Please enter a valid amount");
+                    return;
+                }
+                account_balance -= entered_amount;
+                document.getElementById("balance").innerText = account_balance;
+                document.getElementById("result").innerText = "New Balance: " + account_balance;
+            }
+
+            function creditFunction() {
+                var entered_amount = parseInt(document.getElementById("amount").value);
+                if (isNaN(entered_amount) || entered_amount <= 0) {
+                    alert("Please enter a valid amount");
+                    return;
+                }
+                account_balance += entered_amount;
+                document.getElementById("balance").innerText = account_balance;
+                document.getElementById("result").innerText = "New Balance: " + account_balance;
+            }
+
+            // Validation for the form
+            function validateForm(event) {
+                event.preventDefault();
+                var entered_amount = document.getElementById("amount").value;
+                if (entered_amount === "") {
+                    alert("Please enter amount");
+                    return false;
+                } else {
+                    document.getElementById("result").innerHTML = "Amount Submitted: " + entered_amount;
+                }
+            }
+        </script>
+    </body>
+</html>
